@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.eggs/
+*.manifest
+*.spec.bak
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+ENV/
+
+# Build & distribution (PyInstaller)
+build/
+dist/
+
+# Configuration utilisateur (exemple fourni : config.example.yaml)
+config.yaml
+
+# Tests & couverture
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# IDE & éditeurs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
