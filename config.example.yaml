@@ -1,0 +1,80 @@
+# BASIC Scanner - Configuration exemple
+# Copier en config.yaml et adapter les chemins (supporte UNC: \\NAS\Partage\...)
+
+# Dossier surveillé (Scan to Folder du MFP)
+inbox: "C:/Scans/INBOX"
+# inbox: "//NAS/Partage/Scans/INBOX"
+
+# Racine des dossiers de destination (local ou UNC)
+racine_destination: "C:/Documents/Entreprise"
+# racine_destination: "//NAS/Partage/Documents"
+
+# Dossiers spéciaux (relatifs à racine_destination si chemin relatif)
+dossier_a_classer: "A_CLASSER"
+dossier_failed: "FAILED"
+
+# Surveillance : stabilité du fichier (secondes) avant traitement
+stability_seconds: 5
+stability_check_interval: 1
+# Traiter les PDF déjà présents dans l'INBOX au démarrage (défaut: true)
+# scan_existing_on_start: true
+
+# Seuil de confiance (0..1) en dessous duquel → A_CLASSER
+confidence_threshold: 0.5
+
+# Règles de classement (configurable dans l'interface) : type de document → arborescence + format
+# Types : facture_fournisseur, avoir, devis, courrier, plan, défaut (pour le reste)
+regles_classement:
+  - type: facture_fournisseur
+    modele_chemin: "Factures_fournisseurs/{fournisseur}/{YYYY}/{MM}"
+    modele_nom_fichier: "{YYYY}-{MM}-{DD}_FACT_{fournisseur}_{numero}_{montant}.pdf"
+  - type: avoir
+    modele_chemin: "Avoirs/{fournisseur}/{YYYY}/{MM}"
+    modele_nom_fichier: "{YYYY}-{MM}-{DD}_AVR_{fournisseur}_{numero}.pdf"
+  - type: devis
+    modele_chemin: "Devis/{fournisseur}/{YYYY}/{MM}"
+    modele_nom_fichier: "{YYYY}-{MM}-{DD}_DEVIS_{fournisseur}.pdf"
+  - type: courrier
+    modele_chemin: "Courrier/{YYYY}/{MM}"
+    modele_nom_fichier: "{YYYY}-{MM}-{DD}_courrier.pdf"
+  - type: plan
+    modele_chemin: "Plans/{YYYY}"
+    modele_nom_fichier: "{YYYY}-{MM}-{DD}_plan.pdf"
+  - type: défaut
+    modele_chemin: "Divers/{YYYY}/{MM}"
+    modele_nom_fichier: "{YYYY}-{MM}-{DD}_{type_doc}.pdf"
+
+# Anciens champs (utilisés si regles_classement vide)
+modele_chemin: "Factures_fournisseurs/{fournisseur}/{YYYY}/{MM}"
+modele_nom_fichier: "{YYYY}-{MM}-{DD}_{type_doc}_{fournisseur}_{numero}_{montant}.pdf"
+
+# Format de nom de fichier par dossier (motif → format ; optionnel)
+# Si le fichier va dans un dossier dont le chemin contient le motif, ce format est utilisé
+# formats_par_dossier:
+#   A_CLASSER: "{timestamp}_A_CLASSER_{original}.pdf"
+
+# Mapping fournisseurs : texte trouvé (ou alias) → nom de dossier normalisé
+# Utilisé pour le matching fuzzy (rapidfuzz) et le nom du sous-dossier
+mapping_fournisseurs:
+  "EDF": "EDF"
+  "EDF SA": "EDF"
+  "ENGIE": "ENGIE"
+  "ENGIE (ex GDF)": "ENGIE"
+  "Orange": "Orange"
+  "Orange France": "Orange"
+  "Free": "Free"
+  "Bouygues Telecom": "Bouygues Telecom"
+  "Amazon": "Amazon"
+  "Amazon EU": "Amazon"
+  "Google": "Google"
+  "Microsoft": "Microsoft"
+  "Darty": "Darty"
+  "Leroy Merlin": "Leroy Merlin"
+  "SIRET 123 456 789 00012": "Fournisseur Inconnu"
+
+# OCR (optionnel : langue Tesseract)
+ocr_lang: "fra+eng"
+
+# Logs (optionnel)
+# log_file: "basic_scanner.log"
+# log_dir: "C:/Logs"

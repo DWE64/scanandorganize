@@ -1,0 +1,40 @@
+# Build BASIC Scanner pour macOS (depuis Windows : pousser le code, télécharger l'artifact)
+# Déclenchement : push sur main ou exécution manuelle (Actions → Build macOS → Run workflow)
+name: Build macOS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Build PyInstaller (macOS)
+        run: |
+          python -m PyInstaller --noconfirm basic_scanner_mac.spec
+
+      - name: Créer l'archive ZIP
+        run: |
+          cd dist
+          zip -r BASIC-Scanner-macOS.zip "BASIC Scanner"
+
+      - name: Déposer l'artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BASIC-Scanner-macOS
+          path: dist/BASIC-Scanner-macOS.zip

@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "basic-scanner"
+version = "0.1.0"
+description = "Outil Windows de classement automatique de documents scannés (100% local)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Basic Scanner" }]
+keywords = ["scanner", "ocr", "document", "classification", "pdf"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "watchdog>=3.0.0",
+    "ocrmypdf>=16.0.0",
+    "pymupdf>=1.23.0",
+    "rapidfuzz>=3.0.0",
+    "pyyaml>=6.0",
+    "pytesseract>=0.3.10",
+    "Pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pyinstaller>=6.0.0",
+]
+
+[project.scripts]
+basic_scanner = "basic_scanner.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

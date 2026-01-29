@@ -1,0 +1,16 @@
+# BASIC Scanner - Dépendances (Python 3.11+)
+# Installation : pip install -r requirements.txt
+# Pour l'OCR des PDF scannés (images) : Tesseract doit être installé sur le système.
+
+watchdog>=3.0.0
+ocrmypdf>=16.0.0
+pymupdf>=1.23.0
+rapidfuzz>=3.0.0
+pyyaml>=6.0
+# Fallback OCR : lecture du texte dans les images des pages PDF (PDF scannés)
+pytesseract>=0.3.10
+Pillow>=10.0.0
+
+# Optionnel (développement / tests)
+# pytest>=7.0
+# pytest-cov>=4.0

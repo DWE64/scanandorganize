@@ -1,0 +1,45 @@
+inbox: d:\Users\Utilisateur\Documents\scan
+racine_destination: d:\Users\Utilisateur\Documents\testTri
+dossier_a_classer: A_CLASSER
+dossier_failed: FAILED
+stability_seconds: 5
+stability_check_interval: 1
+confidence_threshold: 0.5
+modele_chemin: Impots/{impots}/{YYYY}/{MM}
+modele_nom_fichier: '{YYYY}-{MM}-{DD}_{type_doc}.pdf'
+mapping_fournisseurs:
+  EDF: EDF
+  EDF SA: EDF
+  ENGIE: ENGIE
+  ENGIE (ex GDF): ENGIE
+  Orange: Orange
+  Orange France: Orange
+  Free: Free
+  Bouygues Telecom: Bouygues Telecom
+  Amazon: Amazon
+  Amazon EU: Amazon
+  Google: Google
+  Microsoft: Microsoft
+  Darty: Darty
+  Leroy Merlin: Leroy Merlin
+  SIRET 123 456 789 00012: Fournisseur Inconnu
+  codeur: codeur
+  impots: impots
+  medecin: medical
+ocr_lang: fra+eng
+formats_par_dossier:
+  codeur: '{timestamp}_codeur_{original}.pdf'
+regles_classement:
+- type: impots
+  modele_chemin: Impots/{impots}/{YYYY}/{MM}
+  modele_nom_fichier: '{YYYY}-{MM}-{DD}_{type_doc}.pdf'
+- type: medical
+  modele_chemin: Medical/{medical}/{YYYY}/{MM}
+  modele_nom_fichier: '{YYYY}-{MM}-{DD}_{type_doc}.pdf'
+cles_personnalisees:
+- cle: impots
+  description: impots
+  valeur_par_defaut: impots
+- cle: medical
+  description: medical
+  valeur_par_defaut: medecin
